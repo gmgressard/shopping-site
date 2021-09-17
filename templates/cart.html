@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+<ul>
+  {% for message in get_flashed_messages() %}
+    <!-- <li>{{ message }}</li> -->
+  {% endfor %}  
+</ul>
+
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th>Melon Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+            <!-- for item in session["cart"] -->
+        <!-- 1st row: melon_types[item].common_name -->
+        <!-- 2nd row: session["cart"][item] -->
+        <!-- 3rd row: melon_types[item].price -->
+        <!-- 4th row: 2nd row * 3rd row -->
+
+        {% for item in melon_cart %}
+        <tr>
+            <td>{{ melon_types[item].common_name }}</td>
+            <td>{{ melon_cart[item] }}</td>
+            <td>{{ melon_types[item].price }}</td>
+            <td>{{ melon_cart[item] * melon_types[item].price }}</td>
+        </tr>
+        {% endfor %}
+        
+        </tbody>
+    </table>
+
+    <h3>Total: $27.00</h3>
+
+    <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
+
+{% endblock %}
